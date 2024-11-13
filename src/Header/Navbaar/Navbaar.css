@@ -1,0 +1,16 @@
+.css-4bojcr-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 20px !important;
+}
+
+.dropdown-button {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-button:hover .dropdown-icon {
+  transform: rotate(180deg); /* Rotates the icon on hover */
+}
+
+.rotate {
+  transition: transform 0.3s ease;
+  transform: rotate(180deg); /* Change this value for desired rotation */
+}

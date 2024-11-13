@@ -1,0 +1,17 @@
+.btn-3d {
+  background-color: #5d2def;
+  color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn-3d-active {
+  background-color: #4b23c8;
+  color: white;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+}
