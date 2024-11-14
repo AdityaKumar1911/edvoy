@@ -1,312 +1,235 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  IconButton,
-  Box,
-} from "@mui/material";
+import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function EventComponent() {
-  const events = [
-    {
-      date: 8,
-      month: "Nov",
-      location: "Online",
-      title: "Web Development Workshop",
-      time: "10:00 am - 12:00 pm",
-    },
-    {
-      date: 9,
-      month: "Nov",
-      location: "New York",
-      title: "Marketing Strategies 101",
-      time: "02:00 pm - 05:00 pm",
-    },
-    {
-      date: 10,
-      month: "Nov",
-      location: "London",
-      title: "Design Thinking Seminar",
-      time: "09:00 am - 11:00 am",
-    },
-    {
-      date: 11,
-      month: "Nov",
-      location: "Tokyo",
-      title: "AI in Healthcare",
-      time: "01:00 pm - 03:00 pm",
-    },
-    {
-      date: 12,
-      month: "Nov",
-      location: "Sydney",
-      title: "Blockchain Basics",
-      time: "04:00 pm - 06:00 pm",
-    },
-    {
-      date: 13,
-      month: "Nov",
-      location: "Berlin",
-      title: "Introduction to IoT",
-      time: "10:00 am - 11:30 am",
-    },
-    {
-      date: 14,
-      month: "Nov",
-      location: "Online",
-      title: "Data Science Bootcamp",
-      time: "03:00 pm - 07:00 pm",
-    },
-    {
-      date: 15,
-      month: "Nov",
-      location: "India",
-      title: "Countdown to Campus Day",
-      time: "03:00 pm - 04:00 pm",
-    },
-    {
-      date: 16,
-      month: "Nov",
-      location: "Paris",
-      title: "Digital Marketing Trends",
-      time: "09:00 am - 12:00 pm",
-    },
-    {
-      date: 17,
-      month: "Nov",
-      location: "San Francisco",
-      title: "Startup Pitch Event",
-      time: "05:00 pm - 07:00 pm",
-    },
-    {
-      date: 18,
-      month: "Nov",
-      location: "Dubai",
-      title: "Tech Expo 2024",
-      time: "12:00 pm - 06:00 pm",
-    },
-    {
-      date: 19,
-      month: "Nov",
-      location: "Singapore",
-      title: "Future of Robotics",
-      time: "11:00 am - 01:00 pm",
-    },
-    {
-      date: 20,
-      month: "Nov",
-      location: "Toronto",
-      title: "Cybersecurity Essentials",
-      time: "02:00 pm - 05:00 pm",
-    },
-    {
-      date: 21,
-      month: "Nov",
-      location: "Amsterdam",
-      title: "Sustainable Energy Summit",
-      time: "08:00 am - 10:30 am",
-    },
-    {
-      date: 22,
-      month: "Nov",
-      location: "Mexico City",
-      title: "Creative Leadership Workshop",
-      time: "01:00 pm - 04:00 pm",
-    },
-    {
-      date: 23,
-      month: "Nov",
-      location: "Rome",
-      title: "Cultural Heritage Symposium",
-      time: "09:30 am - 12:30 pm",
-    },
-    {
-      date: 24,
-      month: "Nov",
-      location: "Moscow",
-      title: "AI in Business Conference",
-      time: "02:00 pm - 05:00 pm",
-    },
-    {
-      date: 25,
-      month: "Nov",
-      location: "Beijing",
-      title: "Big Data & Analytics Summit",
-      time: "10:00 am - 04:00 pm",
-    },
-    {
-      date: 26,
-      month: "Nov",
-      location: "Seoul",
-      title: "Innovation in Tech",
-      time: "03:00 pm - 06:00 pm",
-    },
-    {
-      date: 27,
-      month: "Nov",
-      location: "Bangkok",
-      title: "Finance & Technology Meet",
-      time: "10:30 am - 01:30 pm",
-    },
-    {
-      date: 28,
-      month: "Nov",
-      location: "Los Angeles",
-      title: "Media & Entertainment Expo",
-      time: "04:00 pm - 08:00 pm",
-    },
-    {
-      date: 29,
-      month: "Nov",
-      location: "Rio de Janeiro",
-      title: "Sports Technology Forum",
-      time: "09:00 am - 12:00 pm",
-    },
-    {
-      date: 30,
-      month: "Nov",
-      location: "Cape Town",
-      title: "Green Tech Conference",
-      time: "11:00 am - 03:00 pm",
-    },
-  ];
+const events = [
+  {
+    day: "21",
+    month: "Nov",
+    title: "Workshop on AI",
+    timeIndia: "06:00 pm - 07:00 pm",
+    timeUK: "12:30 pm - 01:30 pm",
+    timeUS: "07:00 am - 08:00 am",
+    image: "https://via.placeholder.com/500x400?text=Workshop+on+AI",
+  },
+  {
+    day: "26",
+    month: "Nov",
+    title: "Coding Bootcamp",
+    timeIndia: "06:30 pm - 08:00 pm",
+    timeUK: "01:00 pm - 02:30 pm",
+    timeUS: "08:00 am - 09:30 am",
+    image: "https://via.placeholder.com/500x400?text=Coding+Bootcamp",
+  },
+  {
+    day: "28",
+    month: "Nov",
+    title: "React Workshop",
+    timeIndia: "07:00 pm - 08:30 pm",
+    timeUK: "01:30 pm - 03:00 pm",
+    timeUS: "08:30 am - 10:00 am",
+    image: "https://via.placeholder.com/500x400?text=React+Workshop",
+  },
+  {
+    day: "30",
+    month: "Nov",
+    title: "Data Science Seminar",
+    timeIndia: "05:00 pm - 06:30 pm",
+    timeUK: "11:30 am - 01:00 pm",
+    timeUS: "06:30 am - 08:00 am",
+    image: "https://via.placeholder.com/500x400?text=Data+Science+Seminar",
+  },
+  {
+    day: "5",
+    month: "Dec",
+    title: "IELTS Masterclass - Speaking",
+    timeIndia: "06:30 pm - 07:30 pm",
+    timeUK: "01:00 pm - 02:00 pm",
+    timeUS: "08:00 am - 09:00 am",
+    image: "https://via.placeholder.com/500x400?text=IELTS+Masterclass",
+  },
+  {
+    day: "10",
+    month: "Dec",
+    title: "Python for Data Analysis",
+    timeIndia: "06:00 pm - 07:30 pm",
+    timeUK: "12:30 pm - 02:00 pm",
+    timeUS: "07:00 am - 08:30 am",
+    image: "https://via.placeholder.com/500x400?text=Python+for+Data+Analysis",
+  },
+  {
+    day: "15",
+    month: "Dec",
+    title: "Machine Learning Basics",
+    timeIndia: "06:00 pm - 08:00 pm",
+    timeUK: "12:30 pm - 02:30 pm",
+    timeUS: "07:00 am - 09:00 am",
+    image: "https://via.placeholder.com/500x400?text=Machine+Learning+Basics",
+  },
+  {
+    day: "20",
+    month: "Dec",
+    title: "Web Development Fundamentals",
+    timeIndia: "05:00 pm - 06:30 pm",
+    timeUK: "11:30 am - 01:00 pm",
+    timeUS: "06:30 am - 08:00 am",
+    image:
+      "https://via.placeholder.com/500x400?text=Web+Development+Fundamentals",
+  },
+  {
+    day: "25",
+    month: "Dec",
+    title: "JavaScript Deep Dive",
+    timeIndia: "07:00 pm - 08:30 pm",
+    timeUK: "01:30 pm - 03:00 pm",
+    timeUS: "08:30 am - 10:00 am",
+    image: "https://via.placeholder.com/500x400?text=JavaScript+Deep+Dive",
+  },
+  {
+    day: "30",
+    month: "Dec",
+    title: "End of Year Celebration",
+    timeIndia: "06:00 pm - 09:00 pm",
+    timeUK: "12:30 pm - 03:30 pm",
+    timeUS: "07:00 am - 10:00 am",
+    image: "https://via.placeholder.com/500x400?text=End+of+Year+Celebration",
+  },
+];
 
-  const [selectedDate, setSelectedDate] = useState(15);
-  const scrollRef = useRef(null);
-
-  const selectedEvent = events.find((event) => event.date === selectedDate);
+export default function UpcomingEvents() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [activeEventIndex, setActiveEventIndex] = useState(0);
+  const containerRef = useRef(null);
 
   const scroll = (direction) => {
-    if (scrollRef.current) {
+    if (containerRef.current) {
       const scrollAmount = 200;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
+      const newPosition =
+        direction === "left"
+          ? Math.max(0, scrollPosition - scrollAmount)
+          : Math.min(
+              containerRef.current.scrollWidth -
+                containerRef.current.clientWidth,
+              scrollPosition + scrollAmount
+            );
+      setScrollPosition(newPosition);
+      containerRef.current.scrollTo({
+        left: newPosition,
         behavior: "smooth",
       });
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        setScrollPosition(
+          Math.min(
+            scrollPosition,
+            containerRef.current.scrollWidth - containerRef.current.clientWidth
+          )
+        );
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [scrollPosition]);
+
   return (
-    <section className="w-full py-12">
-      <div className="container px-4 md:px-6">
-        <Typography variant="h2" align="center" gutterBottom>
-          Upcoming events
-        </Typography>
-        <div className="relative">
-          <IconButton
-            color="primary"
-            style={{
-              position: "absolute",
-              left: 0,
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-            }}
-            onClick={() => scroll("left")}
-          >
-            <ChevronLeft />
-          </IconButton>
-          <IconButton
-            color="primary"
-            style={{
-              position: "absolute",
-              right: 0,
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-            }}
-            onClick={() => scroll("right")}
-          >
-            <ChevronRight />
-          </IconButton>
-          <Box
-            ref={scrollRef}
-            display="flex"
-            padding={2}
-            overflow="auto"
-            sx={{
-              scrollBehavior: "smooth",
-              overflowX: "scroll",
-              "&::-webkit-scrollbar": { display: "none" },
-            }}
-          >
-            {events.map((event) => (
-              <Box
-                key={event.date}
-                sx={{
-                  cursor: "pointer",
-                  minWidth: 100,
-                  textAlign: "center",
-                  p: 2,
-                  borderRadius: 1,
-                  backgroundColor:
-                    selectedDate === event.date ? "#5D2B8C" : "grey.100",
-                  color:
-                    selectedDate === event.date ? "white" : "text.secondary",
-                }}
-                onClick={() => setSelectedDate(event.date)}
-              >
-                <Typography variant="h5" component="div">
-                  {event.date}
-                </Typography>
-                <Typography variant="caption">{event.month}</Typography>
-              </Box>
-            ))}
-          </Box>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-5xl font-bold text-center mb-12 text-[#5E2B9B]">
+        Upcoming Events
+      </h1>
+
+      <div className="relative">
+        <button
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2"
+          onClick={() => scroll("left")}
+          disabled={scrollPosition === 0}
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+
+        <div
+          ref={containerRef}
+          className="flex overflow-x-hidden gap-4 mb-8 px-12"
+        >
+          {events.map((event, index) => (
+            <div
+              key={index}
+              className={`flex-shrink-0 w-24 h-24 rounded-lg flex flex-col items-center justify-center cursor-pointer
+                ${
+                  index === activeEventIndex
+                    ? "bg-[#5E2B9B] text-white"
+                    : "bg-gray-100 text-gray-500"
+                }`}
+              onClick={() => setActiveEventIndex(index)}
+            >
+              <div className="text-3xl font-bold">{event.day}</div>
+              <div className="text-sm">{event.month}</div>
+            </div>
+          ))}
         </div>
 
-        {selectedEvent && selectedEvent.title && (
-          <Card sx={{ mt: 4 }}>
-            <CardContent>
-              <Box
-                display="flex"
-                flexDirection={{ xs: "column", md: "row" }}
-                gap={2}
-              >
-                <Box bgcolor="#5D2B8C" color="white" p={2} flex={1}>
-                  <Typography variant="body2">
-                    {selectedEvent.location}
-                  </Typography>
-                  <Typography variant="body2" mb={2}>
-                    {selectedEvent.time}
-                  </Typography>
-                  <Typography variant="h6" gutterBottom>
-                    {selectedEvent.title}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    sx={{
-                      bgcolor: "white",
-                      color: "#5D2B8C",
-                      "&:hover": { bgcolor: "grey.100" },
-                    }}
-                  >
-                    View Details
-                  </Button>
-                </Box>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  bgcolor="#1a1a1a"
-                  p={2}
-                  flex={1}
-                >
-                  <Typography variant="h5" color="white">
-                    Countdown to Campus Day
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
-          </Card>
-        )}
+        <button
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2"
+          onClick={() => scroll("right")}
+          disabled={
+            containerRef.current &&
+            scrollPosition >=
+              containerRef.current.scrollWidth -
+                containerRef.current.clientWidth
+          }
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
       </div>
-    </section>
+
+      <div className="rounded-2xl overflow-hidden shadow-lg">
+        <div className="flex flex-col md:flex-row bg-white">
+          <div className="w-full md:w-1/2 p-8 bg-gradient-to-r from-[#5E2B9B] to-[#9747FF] text-white">
+            <div className="text-5xl font-bold mb-4">
+              {events[activeEventIndex].day}
+            </div>
+            <div className="text-2xl mb-6">
+              {events[activeEventIndex].month}
+            </div>
+
+            <div className="space-y-4 mb-8">
+              <div>
+                <div className="font-medium">India</div>
+                <div>{events[activeEventIndex].timeIndia}</div>
+              </div>
+              <div>
+                <div className="font-medium">United Kingdom</div>
+                <div>{events[activeEventIndex].timeUK}</div>
+              </div>
+              <div>
+                <div className="font-medium">United States</div>
+                <div>{events[activeEventIndex].timeUS}</div>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold mb-6">
+              {events[activeEventIndex].title}
+            </h2>
+
+            <button className="bg-white text-[#5E2B9B] hover:bg-gray-100 px-4 py-2 rounded">
+              View Details
+            </button>
+          </div>
+
+          <div className="w-full md:w-1/2 h-64 md:h-auto">
+            <img
+              src={events[activeEventIndex].image}
+              alt={events[activeEventIndex].title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

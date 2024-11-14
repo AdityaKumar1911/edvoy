@@ -11,6 +11,7 @@ import Unlockyour from "./UnlockyourSliding/Unlockyour";
 import Event from "./Event/Event";
 import Lets from "./Lets/Lets";
 import Footer from "./Footer/Footer";
+import Driving from "./Driving/Driving";
 function App() {
   return (
     <div>
@@ -22,6 +23,7 @@ function App() {
         <SlidingCard />
         <Unlockyour />
         <Event />
+        <Driving />
         <Lets />
         <Footer />
       </Router>
